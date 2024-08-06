@@ -15,7 +15,7 @@ const SidePanelPage = () => {
       _sender: any,
       sendResponse: (payload: Record<string, any>) => void
     ) => {
-      if (message.type === "SEND_MESSAGE") {
+      if (message.type === Action.SEND_MESSAGE) {
         setListMessages((previousMessages) => [
           ...previousMessages,
           { from: message.from, message: message.message },
@@ -46,8 +46,8 @@ const SidePanelPage = () => {
         />
         <button
           className="bg-gray-700 text-white rounded-sm px-2 py-1"
-          onClick={() => {
-            void sentMessage({
+          onClick={async () => {
+            await sentMessage({
               type: Action.SEND_MESSAGE,
               from: Source.SIDE_PANEL,
               message,
